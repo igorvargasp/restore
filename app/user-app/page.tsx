@@ -1,13 +1,14 @@
-import { UserNav } from "@/components/common/user-nav";
 import { Button } from "@/components/ui/button";
 import { TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserAppHeader from "@/components/user-app/user-app-header";
 import { Sidebar } from "@/components/user-app/user-app-sidebar";
-import { Tabs } from "@radix-ui/react-tabs";
+import { Tabs } from "@/components/ui/tabs";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { RedirectType, redirect } from "next/navigation";
 import { PlusCircleIcon } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import ImageUploadPlaceHolder from "@/components/user-app/img-upload-placeholder";
 
 export default async function UserApp() {
   let loggedIn = false;
@@ -34,40 +35,41 @@ export default async function UserApp() {
               <Sidebar className="hidden lg:block" />
               <div className="col-span-3 lg:col-span-4 lg:border-l">
                 <div className="h-full px-4 py-6 lg:px-8">
-                  <Tabs defaultValue="music" className="h-full space-y-6">
+                  <Tabs defaultValue="photos" className="h-full space-y-6">
                     <div className="space-between flex items-center">
                       <TabsList>
-                        <TabsTrigger value="music" className="relative">
-                          Music
+                        <TabsTrigger value="photos" className="relative">
+                          Photos
                         </TabsTrigger>
-                        <TabsTrigger value="podcasts">Podcasts</TabsTrigger>
-                        <TabsTrigger value="live" disabled>
-                          Live
+                        <TabsTrigger value="documents">Documents</TabsTrigger>
+                        <TabsTrigger value="other" disabled>
+                          Other
                         </TabsTrigger>
                       </TabsList>
                       <div className="ml-auto mr-4">
                         <Button>
                           <PlusCircleIcon className="mr-2 h-4 w-4" />
-                          Add music
+                          Add Collection
                         </Button>
                       </div>
                     </div>
                     <TabsContent
-                      value="music"
+                      value="photos"
                       className="border-none p-0 outline-none"
                     >
                       <div className="flex items-center justify-between">
                         <div className="space-y-1">
                           <h2 className="text-2xl font-semibold tracking-tight">
-                            Listen Now
+                            Photo Collection
                           </h2>
                           <p className="text-sm text-muted-foreground">
-                            Top picks for you. Updated daily.
+                            the photos you already enhanced
                           </p>
                         </div>
                       </div>
                       <Separator className="my-4" />
                       <div className="relative">
+                        <ImageUploadPlaceHolder/>
                         {/* <ScrollArea>
                           <div className="flex space-x-4 pb-4">
                             {listenNowAlbums.map((album) => (
@@ -112,7 +114,7 @@ export default async function UserApp() {
                       </div>
                     </TabsContent>
                     <TabsContent
-                      value="podcasts"
+                      value="documents"
                       className="h-full flex-col border-none p-0 data-[state=active]:flex"
                     >
                       <div className="flex items-center justify-between">
